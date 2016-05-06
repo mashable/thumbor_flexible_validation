@@ -13,9 +13,10 @@ from setuptools import find_packages
 
 setup(
     name='thumbor_proxy',
-    version='1.0.0',
+    version='1.0.1',
     packages=find_packages(),
     install_requires=[
         'thumbor',
-    ]
+    ],
+    tests_require = ['thumbor', 'scikit-image', 'preggy', 'nosetest', 'numpy', 'PIL']
 )
