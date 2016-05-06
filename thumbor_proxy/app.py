@@ -54,7 +54,6 @@ class RewriteHandler(ImagingHandler):
             if collapsed_slash:
                 load_target = load_target.replace(collapsed_slash.group(1), collapsed_slash.group(1) + "/")
                 unescaped_url = "/%s/%s/%s" % (kw['hash'], url_options, load_target)
-                print "validating load_target %s -> %s" % (load_target, unescaped_url)
                 if self.validate_url(unescaped_url, security_key):
                     kw['image'] = load_target
                     self.request.path = unescaped_url
