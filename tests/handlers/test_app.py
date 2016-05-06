@@ -43,7 +43,7 @@ class UrlValidationPermtuationsTestCase(BaseImagingTestCase):
 
         importer = Importer(cfg)
         importer.import_modules()
-        server = ServerParameters(8889, 'localhost', 'thumbor.conf', None, 'info', 'thumbor_proxy.app.ThumborServiceProxy')
+        server = ServerParameters(8889, 'localhost', 'thumbor.conf', None, 'info', 'thumbor_flexible_validation.app.ThumborServiceProxy')
         server.security_key = 'ACME-SEC'
         return Context(server, cfg, importer)
 

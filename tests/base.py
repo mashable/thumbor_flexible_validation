@@ -1,5 +1,5 @@
 from tornado.testing import AsyncHTTPTestCase
-from thumbor_proxy.app import ThumborServiceProxy
+from thumbor_flexible_validation.app import ThumborServiceProxy
 from PIL import Image
 from preggy import create_assertions
 from skimage.measure import compare_ssim
