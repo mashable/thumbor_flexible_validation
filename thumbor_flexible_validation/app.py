@@ -59,22 +59,20 @@ class RewriteHandler(ImagingHandler):
                     self.request.path = unescaped_url
                     return
 
-            # Undo URL unquoting
-            if load_target.find("://") >= 0:
-                load_target = quote(load_target, safe='')
-                unescaped_url = "/%s/%s/%s" % (kw['hash'], url_options, load_target)
-                if self.validate_url(unescaped_url, security_key):
-                    kw['image'] = unquote(load_target)
-                    self.request.path = unescaped_url
-                    return
+            # Attempt to validate with unescaped quoting
+            load_target = quote(load_target, safe='')
+            unescaped_url = "/%s/%s/%s" % (kw['hash'], url_options, load_target)
+            if self.validate_url(unescaped_url, security_key):
+                kw['image'] = unquote(load_target)
+                self.request.path = unescaped_url
+                return
 
-            # Undo double-quoting
-            if load_target.find("%3A%2F") >= 0:
-                load_target = unquote(kw['image'])
-                unescaped_url = "/%s/%s/%s" % (kw['hash'], url_options, quote(load_target, safe=''))
-                if self.validate_url(unescaped_url, security_key):
-                    self.request.path = unescaped_url
-                    kw['image'] = load_target
+            # Attempt to validate with unquoting
+            load_target = unquote(kw['image'])
+            unescaped_url = "/%s/%s/%s" % (kw['hash'], url_options, quote(load_target, safe=''))
+            if self.validate_url(unescaped_url, security_key):
+                self.request.path = unescaped_url
+                kw['image'] = load_target
 
 
     @tornado.web.asynchronous
